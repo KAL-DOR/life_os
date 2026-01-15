@@ -5,7 +5,7 @@ CREATE TYPE investment_type AS ENUM ('fixed', 'variable', 'crypto', 'stocks');
 CREATE TABLE pinsAndUsers (
 username text NOT NULL,
 email text,
-enc_pin bigint NOT NULL,
+enc_pin text NOT NULL,
 created_at timestamp,
 updated_at timestamp,
 user_id uuid NOT NULL,
@@ -16,7 +16,6 @@ user_id uuid NOT NULL,
 name text NOT NULL,
 description text NOT NULL,
 target_date timestamp NOT NULL,
-milestone_id uuid,
 created_at timestamp,
 updated_at timestamp,
 goal_id uuid NOT NULL,
@@ -35,7 +34,6 @@ PRIMARY KEY (milestone_id),
 FOREIGN KEY (user_id) REFERENCES pinsAndUsers(user_id),
 FOREIGN KEY (goal_id) REFERENCES goals(goal_id)
 );
-ALTER TABLE goals ADD FOREIGN KEY (milestone_id) REFERENCES milestones(milestone_id);
 CREATE TABLE bankAccounts (
 user_id uuid NOT NULL,
 institution text NOT NULL,
@@ -74,4 +72,19 @@ transaction_id uuid NOT NULL,
 PRIMARY KEY (transaction_id),
 FOREIGN KEY (user_id) REFERENCES pinsAndUsers(user_id),
 FOREIGN KEY (bank_id) REFERENCES bankAccounts(bank_id)
+);
+CREATE TABLE reminder (
+user_id uuid NOT NULL,
+title text NOT NULL,
+target_date timestamp NOT NULL,
+last_triggered timestamp,
+is_progressive boolean,
+created_at timestamp,
+updated_at timestamp,
+reminder_id uuid NOT NULL,
+is_repeated boolean NOT NULL,
+repeat_schedule text,
+PRIMARY KEY (reminder_id),
+FOREIGN KEY (user_id) REFERENCES pinsAndUsers(user_id),
+ CHECK (NOT (is_progressive = true AND is_repeated = true))
 );

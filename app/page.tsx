@@ -1,8 +1,27 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { Terminal } from '@xterm/xterm';
+// import { useEffect, useRef } from 'react';
+// import { Terminal } from '@xterm/xterm';
+import { MenuList, MenuListItem, Separator, styleReset } from 'react95';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
+import original from 'react95/dist/themes/original';
+
+const App = () =>{
+  return <div>
+    <ThemeProvider theme ={original}>
+      <MenuList>
+        <MenuListItem> Probando</MenuListItem>
+      </MenuList>
+    </ThemeProvider>
+
+  </div>
+};
+export default App
+
+
+
+/*
 export default function Home() {
   const terminalRef = useRef<HTMLDivElement>(null);
   const terminalInstanceRef = useRef<Terminal | null>(null);
@@ -32,3 +51,4 @@ export default function Home() {
     <div id="terminal" ref={terminalRef} style={{ width: '100%', height: '100vh' }} />
   );
 }
+*/
