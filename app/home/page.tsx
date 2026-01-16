@@ -13,6 +13,7 @@ import {
 } from 'react95';
 import { ThemeProvider } from 'styled-components';
 import original from 'react95/dist/themes/original';
+import Finance from '@/components/Finance';
 
 // Types for our windows
 type ModuleType = 'finance' | 'goals' | 'reminders' | null;
@@ -256,11 +257,7 @@ export default function HomePage() {
                 <span style={{ flex: 1 }}>{getWindowTitle()}</span>
               </WindowHeader>
               <WindowContent style={{ flex: 1, overflow: 'auto' }}>
-                {activeModule === 'finance' && (
-                  <div>
-                    <p>Finance module content goes here...</p>
-                  </div>
-                )}
+                {activeModule === 'finance' && <Finance />}
                 {activeModule === 'goals' && (
                   <div>
                     <p>Goals & Milestones content goes here...</p>

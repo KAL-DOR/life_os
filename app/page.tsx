@@ -1,13 +1,14 @@
-'use client';
-
 // import { useEffect, useRef } from 'react';
 // import { Terminal } from '@xterm/xterm';
 import { MenuList, MenuListItem, Separator, styleReset } from 'react95';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { getSession } from '@/lib/session/actions';
 
 import original from 'react95/dist/themes/original';
 
-const App = () =>{
+const  App = async () =>{
+  const session = await getSession();
+  console.log(session)
   return <div>
     <ThemeProvider theme ={original}>
       <MenuList>
